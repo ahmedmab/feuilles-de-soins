@@ -106,6 +106,10 @@
   }
   .full { grid-column: 1 / -1; }
 
+  /* les adresses disposent de toute la largeur (saisie plus confortable) */
+  #f-adresse, #f-adresseAr { grid-column: 1 / -1; }
+  #f-adresse textarea, #f-adresseAr textarea { min-height: 84px; font-size: .95rem; }
+
   label.lbl {
     display: block;
     font-size: .72rem; font-weight: 700; letter-spacing: .045em;
@@ -415,12 +419,12 @@
 
           <div id="f-adresse">
             <label class="lbl" for="adresse">Adresse <span class="lbl-alt">FR</span></label>
-            <textarea id="adresse" rows="2" placeholder="Ex. 12 Rue Ibn Sina, Quartier Maârif, Casablanca"></textarea>
+            <textarea id="adresse" rows="3" placeholder="Ex. 12 Rue Ibn Sina, Quartier Maârif, Casablanca"></textarea>
           </div>
 
           <div id="f-adresseAr">
             <label class="lbl" for="adresseAr">العنوان <span class="lbl-alt lbl-alt-ar">AR</span></label>
-            <textarea id="adresseAr" rows="2" dir="rtl" lang="ar" placeholder="مثال: 12 زنقة ابن سينا، حي المعاريف، الدار البيضاء"></textarea>
+            <textarea id="adresseAr" rows="3" dir="rtl" lang="ar" placeholder="مثال: 12 زنقة ابن سينا، حي المعاريف، الدار البيضاء"></textarea>
           </div>
         </form>
 
