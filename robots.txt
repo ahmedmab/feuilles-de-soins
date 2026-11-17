@@ -1,0 +1,3 @@
+# Application personnelle de remplissage de formulaires : pas d'indexation.
+User-agent: *
+Disallow: /
