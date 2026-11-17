@@ -422,16 +422,6 @@
             <label class="lbl" for="adresseAr">العنوان <span class="lbl-alt lbl-alt-ar">AR</span></label>
             <textarea id="adresseAr" rows="2" dir="rtl" lang="ar" placeholder="مثال: 12 زنقة ابن سينا، حي المعاريف، الدار البيضاء"></textarea>
           </div>
-
-          <div id="f-montant">
-            <label class="lbl" for="montant">Montant des frais (Dhs)</label>
-            <input type="text" id="montant" inputmode="decimal" placeholder="Ex. 1 250,00" spellcheck="false">
-          </div>
-
-          <div id="f-nbPieces">
-            <label class="lbl" for="nbPieces">Nombre de pièces jointes</label>
-            <input type="text" id="nbPieces" inputmode="numeric" placeholder="Ex. 5" spellcheck="false">
-          </div>
         </form>
 
         <p class="warn" id="warn" hidden></p>
@@ -1611,22 +1601,6 @@ globalThis.CNOPS_LAYOUT = {
             "right": 741.0,
             "maxWidth": 337.0
           }
-        },
-        "montant": {
-          "baseline": 243.3,
-          "size": 6.8,
-          "ltr": {
-            "x": 518.0,
-            "maxWidth": 176.0
-          }
-        },
-        "nbPieces": {
-          "baseline": 257.5,
-          "size": 6.8,
-          "ltr": {
-            "x": 526.0,
-            "maxWidth": 168.0
-          }
         }
       },
       "grids": {
@@ -1713,22 +1687,6 @@ globalThis.CNOPS_LAYOUT = {
           "rtl": {
             "right": 741.0,
             "maxWidth": 337.0
-          }
-        },
-        "montant": {
-          "baseline": 256.9,
-          "size": 6.8,
-          "ltr": {
-            "x": 508.0,
-            "maxWidth": 182.0
-          }
-        },
-        "nbPieces": {
-          "baseline": 271.5,
-          "size": 6.8,
-          "ltr": {
-            "x": 537.0,
-            "maxWidth": 153.0
           }
         }
       },
@@ -1817,22 +1775,6 @@ globalThis.CNOPS_LAYOUT = {
             "right": 741.0,
             "maxWidth": 337.0
           }
-        },
-        "montant": {
-          "baseline": 258.3,
-          "size": 6.8,
-          "ltr": {
-            "x": 508.0,
-            "maxWidth": 182.0
-          }
-        },
-        "nbPieces": {
-          "baseline": 272.9,
-          "size": 6.8,
-          "ltr": {
-            "x": 515.0,
-            "maxWidth": 178.0
-          }
         }
       },
       "grids": {
@@ -1920,22 +1862,6 @@ globalThis.CNOPS_LAYOUT = {
             "right": 980.0,
             "maxWidth": 350.0
           }
-        },
-        "montant": {
-          "baseline": 278.0,
-          "size": 6.8,
-          "ltr": {
-            "x": 755.0,
-            "maxWidth": 88.0
-          }
-        },
-        "nbPieces": {
-          "baseline": 292.0,
-          "size": 6.8,
-          "ltr": {
-            "x": 775.0,
-            "maxWidth": 42.0
-          }
         }
       },
       "grids": {
@@ -2015,22 +1941,6 @@ globalThis.CNOPS_LAYOUT = {
           "rtl": {
             "right": 958.0,
             "maxWidth": 328.0
-          }
-        },
-        "montant": {
-          "baseline": 212.0,
-          "size": 6.8,
-          "ltr": {
-            "x": 690.0,
-            "maxWidth": 68.0
-          }
-        },
-        "nbPieces": {
-          "baseline": 228.0,
-          "size": 6.8,
-          "ltr": {
-            "x": 822.0,
-            "maxWidth": 50.0
           }
         }
       },
@@ -2378,16 +2288,6 @@ globalThis.CNOPS_FONT_AR_BOLD = "AAEAAAASAQAABAAgRFNJRwAAAAEAAAEsAAAACEdERUYspyy
       }
     }
 
-    /* --- Montant et nombre de pièces --- */
-    ['montant', 'nbPieces'].forEach(function (key) {
-      var value = clean(d[key]);
-      if (!value || !lines[key]) return;
-      var cfg = lines[key];
-      var fit = layoutLine(value, 'ltr', cfg.ltr.maxWidth, cfg.size, min, fonts, '\u2026');
-      if (fit.truncated) warnings.push({ field: key, message: 'Valeur trop longue : la fin est coupée.' });
-      pushLine(texts, fit, { kind: 'ltr', x: cfg.ltr.x, baseline: cfg.baseline }, fonts, key);
-    });
-
     /* --- Grilles de chiffres : un caractère par case --- */
     var gridData = {
       affiliation: cleanDigits(d.affiliation),
@@ -2457,7 +2357,7 @@ globalThis.CNOPS_FONT_AR_BOLD = "AAEAAAASAQAABAAgRFNJRwAAAAEAAAEsAAAACEdERUYspyy
 
   function needsArabicFont(data) {
     var d = data || {};
-    var keys = ['nomPrenom', 'nomPrenomAr', 'adresse', 'adresseAr', 'montant', 'nbPieces'];
+    var keys = ['nomPrenom', 'nomPrenomAr', 'adresse', 'adresseAr'];
     for (var i = 0; i < keys.length; i++) {
       if (hasArabic(clean(d[keys[i]]))) return true;
     }
@@ -2546,7 +2446,7 @@ globalThis.CNOPS_FONT_AR_BOLD = "AAEAAAASAQAABAAgRFNJRwAAAAEAAAEsAAAACEdERUYspyy
   function $(id) { return document.getElementById(id); }
 
   var FIELDS = ['nomPrenom', 'nomPrenomAr', 'affiliation', 'immatriculation', 'cin',
-    'adresse', 'adresseAr', 'montant', 'nbPieces'];
+    'adresse', 'adresseAr'];
   var el = {};
   FIELDS.forEach(function (k) { el[k] = $(k); });
 
@@ -2748,9 +2648,7 @@ globalThis.CNOPS_FONT_AR_BOLD = "AAEAAAASAQAABAAgRFNJRwAAAAEAAAEsAAAACEdERUYspyy
       'f-cin': !!grids.cin,
       'f-relation': Object.keys(doc.circles || {}).length > 0,
       'f-adresse': !!lines.adresse1,
-      'f-adresseAr': !!lines.adresse1,
-      'f-montant': !!lines.montant,
-      'f-nbPieces': !!lines.nbPieces
+      'f-adresseAr': !!lines.adresse1
     };
     Object.keys(show).forEach(function (fid) {
       var node = $(fid);
